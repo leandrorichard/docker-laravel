@@ -9,12 +9,12 @@ WORKDIR /var/www
 RUN rm -rf /var/www/html
 
 # COPY . /var/www
-RUN chown -R www-data:www-data /var/www
+RUN chown -R www-data:www-data /var/www && \
+    usermod -u 1000 www-data
 
-RUN ls -s public html
-
-RUN usermod -u 1000 www-data
 USER www-data
+
+#RUN ls -s public html
 
 EXPOSE 9000
 ENTRYPOINT ["php-fpm"]
